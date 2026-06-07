@@ -1015,17 +1015,17 @@ function buildRobots() {
 // === RUN =====================================================================
 
 write("index.html", buildHome());
-write("database.html", buildDatabase());
-write("decoder.html", buildDecoder());
+write("database/index.html", buildDatabase());
+write("decoder/index.html", buildDecoder());
 write("routes/index.html", buildDirectory());
 write("states/index.html", buildStatesIndex());
-write("superlatives.html", buildSuperlatives());
-write("guide.html", buildGuide());
-write("history.html", buildHistory());
-write("map.html", buildMap());
-write("faq.html", buildFaq());
-write("glossary.html", buildGlossary());
-write("sources.html", buildSources());
+write("superlatives/index.html", buildSuperlatives());
+write("guide/index.html", buildGuide());
+write("history/index.html", buildHistory());
+write("map/index.html", buildMap());
+write("faq/index.html", buildFaq());
+write("glossary/index.html", buildGlossary());
+write("sources/index.html", buildSources());
 write("404.html", build404());
 
 for (const route of routesWithPages) {
