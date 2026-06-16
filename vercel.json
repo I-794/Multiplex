@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "buildCommand": "node generate.mjs",
-  "outputDirectory": ".",
+  "outputDirectory": "dist",
   "headers": [
     {
       "source": "/(.*)",
