@@ -170,7 +170,7 @@ function buildHome() {
                 .map((r) => {
                   const stat = r.lengthMi ? `${fmt(r.lengthMi)} mi` : r.year ? `est. ${r.year}` : r.axis;
                   return \`<li>
-                <a href="/routes/${r.slug}">
+                <a href="/routes/\${r.slug}">
                   \${shieldHTML(r.id, "sm")}
                   <span class="board-meta"><span class="board-name">\${escapeHtml(r.id)}</span><span class="board-sub">\${escapeHtml(r.corridor)}</span></span>
                   <span class="board-stat mono">\${escapeHtml(stat)}</span>
@@ -230,7 +230,7 @@ function buildHome() {
         <div style="margin-top:24px">
           <a class="btn-ghost" href="/routes">See the full route directory</a>
         </div>
-      </section>\`;
+      </section>`;
 
   return renderPage({
     key: "home",
@@ -244,7 +244,7 @@ function buildHome() {
 // === DATABASE ================================================================
 
 function buildDatabase() {
-  const main = \`
+  const main = `
       <section class="wrap-wide section">
         <div class="section-head">
           <p class="kicker">Reference database</p>
@@ -270,7 +270,7 @@ function buildDatabase() {
           </div>
           <aside class="detail-panel" id="route-detail"></aside>
         </div>
-      </section>\`;
+      </section>`;
 
   return renderPage({
     key: "database",
@@ -285,7 +285,7 @@ function buildDatabase() {
 // === DECODER =================================================================
 
 function buildDecoder() {
-  const main = \`
+  const main = `
       <section class="wrap section">
         <div class="section-head">
           <p class="kicker">Number decoder</p>
@@ -306,7 +306,7 @@ function buildDecoder() {
           </div>
           <div class="decoder-out" id="decoder-output"></div>
         </div>
-      </section>\`;
+      </section>`;
 
   return renderPage({
     key: "decoder",
@@ -323,14 +323,14 @@ function buildDecoder() {
 function buildMileageTable(route) {
   if (!route.mileage || !route.mileage.length) return "";
   const rows = route.mileage
-    .map(m => \`
+    .map(m => `
       <tr>
-        <td class="state-col">\${escapeHtml(C.stateNames[m.state] || m.state)}</td>
-        <td class="miles-col">\${m.miles.toFixed(1)}</td>
-      </tr>\`)
+        <td class="state-col">${escapeHtml(C.stateNames[m.state] || m.state)}</td>
+        <td class="miles-col">${m.miles.toFixed(1)}</td>
+      </tr>`)
     .join("");
   
-  return \`
+  return `
     <div class="prose" style="margin-top:32px">
       <h3>State-by-state mileage</h3>
       <table class="mileage-table">
@@ -341,14 +341,14 @@ function buildMileageTable(route) {
           </tr>
         </thead>
         <tbody>
-          \${rows}
+          ${rows}
           <tr style="background:var(--surface-2);font-weight:700">
             <td>Total</td>
-            <td class="miles-col">\${fmt(route.lengthMi)}</td>
+            <td class="miles-col">${fmt(route.lengthMi)}</td>
           </tr>
         </tbody>
       </table>
-    </div>\`;
+    </div>`;
 }
 
 function junctionLinks(route) {
@@ -357,8 +357,8 @@ function junctionLinks(route) {
     .map((rawId) => {
       const id = normalizeRouteInput(rawId);
       const target = pageById.get(id);
-      const href = target ? \`/routes/\${target.slug}\` : \`/database?q=\${encodeURIComponent(id)}\`;
-      return \`<a href="\${href}">\${shieldHTML(id, "sm")}<span>\${escapeHtml(id)}</span></a>\`;
+      const href = target ? `/routes/${target.slug}` : `/database?q=${encodeURIComponent(id)}`;
+      return `<a href="${href}">${shieldHTML(id, "sm")}<span>${escapeHtml(id)}</span></a>`;
     })
     .join("\n            ");
 }
@@ -369,8 +369,8 @@ function auxLinks(route) {
     .map((rawId) => {
       const id = normalizeRouteInput(rawId);
       const target = pageById.get(id);
-      const href = target ? \`/routes/\${target.slug}\` : \`/database?q=\${encodeURIComponent(id)}\`;
-      return \`<a href="\${href}">\${shieldHTML(id, "sm")}<span>\${escapeHtml(id)}</span></a>\`;
+      const href = target ? `/routes/${target.slug}` : `/database?q=${encodeURIComponent(id)}`;
+      return `<a href="${href}">${shieldHTML(id, "sm")}<span>${escapeHtml(id)}</span></a>`;
     })
     .join("\n            ");
 }
@@ -382,7 +382,7 @@ function buildRoutePage(base) {
   const next = idx < orderedPages.length - 1 ? orderedPages[idx + 1] : null;
 
   const stat = (k, v, unit) =>
-    \`<div class="cell"><span class="k">\${escapeHtml(k)}</span><span class="v mono">\${v == null ? "n/a" : escapeHtml(String(v))}\${unit ? \`<small> \${escapeHtml(unit)}</small>\` : ""}</span></div>\`;
+    `<div class="cell"><span class="k">${escapeHtml(k)}</span><span class="v mono">${v == null ? "n/a" : escapeHtml(String(v))}${unit ? `<small> ${escapeHtml(unit)}</small>` : ""}</span></div>`;
 
   const statgrid = [
     stat("Length", route.lengthMi == null ? "n/a" : fmt(route.lengthMi), route.lengthMi == null ? "" : "mi"),
@@ -391,70 +391,70 @@ function buildRoutePage(base) {
     stat("Junctions", route.junctions.length || "n/a"),
   ].join("\n          ");
 
-  const description = route.description.map((para) => \`<p>\${escapeHtml(para)}</p>\`).join("\n            ");
+  const description = route.description.map((para) => `<p>${escapeHtml(para)}</p>`).join("\n            ");
   const historyBlock = route.history.length
-    ? \`<h3>History</h3>\${route.history.map((p) => \`<p>\${escapeHtml(p)}</p>\`).join("\n            ")}\`
+    ? `<h3>History</h3>${route.history.map((p) => `<p>${escapeHtml(p)}</p>`).join("\n            ")}`
     : "";
 
   const cities = route.cities.length
-    ? \`<div class="chip-set">\${route.cities.map((c) => \`<span class="chip">\${escapeHtml(c)}</span>\`).join("")}</div>\`
+    ? `<div class="chip-set">${route.cities.map((c) => `<span class="chip">${escapeHtml(c)}</span>`).join("")}</div>`
     : "<p>Not recorded.</p>";
 
   const facts = route.notes.length
-    ? \`<h3>Did you know</h3><ul class="fact-list">\${route.notes.map((n) => \`<li>\${escapeHtml(n)}</li>\`).join("")}</ul>\`
+    ? `<h3>Did you know</h3><ul class="fact-list">${route.notes.map((n) => `<li>${escapeHtml(n)}</li>`).join("")}</ul>`
     : "";
 
-  const main = \`
+  const main = `
       <section class="wrap-wide">
         <nav style="padding-top:22px"><a class="btn-ghost" href="/routes">All routes</a></nav>
         <div class="route-hero">
-          \${shieldHTML(route.id, "lg")}
+          ${shieldHTML(route.id, "lg")}
           <div>
-            <p class="kicker">\${escapeHtml(route.category)} route</p>
-            <h1>\${escapeHtml(route.id)}</h1>
-            <p class="lead">\${escapeHtml(route.corridor)}</p>
+            <p class="kicker">${escapeHtml(route.category)} route</p>
+            <h1>${escapeHtml(route.id)}</h1>
+            <p class="lead">${escapeHtml(route.corridor)}</p>
             <div class="meta-row">
-              <span class="status \${statusClass(route.status)}">\${escapeHtml(route.status)}</span>
-              <span class="chip">\${escapeHtml(route.axis)}</span>
+              <span class="status ${statusClass(route.status)}">${escapeHtml(route.status)}</span>
+              <span class="chip">${escapeHtml(route.axis)}</span>
             </div>
           </div>
         </div>
 
         <div class="route-statgrid" data-reveal>
-          \${statgrid}
+          ${statgrid}
         </div>
 
         <div class="route-body section">
           <div class="prose">
-            <h2>About \${escapeHtml(route.id)}</h2>
-            \${description}
-            \${buildMileageTable(route)}
-            \${historyBlock}
+            <h2>About ${escapeHtml(route.id)}</h2>
+            ${description}
+            ${buildMileageTable(route)}
+            ${historyBlock}
             <h3>Major cities and places</h3>
-            \${cities}
-            \${facts}
+            ${cities}
+            ${facts}
           </div>
           <aside>
             <div class="card">
               <h3 style="font-size:1rem">Interstate junctions</h3>
               <div class="junction-links">
-                \${junctionLinks(route)}
+                ${junctionLinks(route)}
               </div>
             </div>
           </aside>
         </div>
 
         <div class="prevnext section-tight">
-          \${prev ? \`<a href="/routes/\${prev.slug}"><span class="dir">Previous</span><span class="to-name">\${escapeHtml(prev.id)}</span></a>\` : "<span></span>"}
-          \${next ? \`<a class="next" href="/routes/\${next.slug}"><span class="dir">Next</span><span class="to-name">\${escapeHtml(next.id)}</span></a>\` : "<span></span>"}
+          ${prev ? `<a href="/routes/${prev.slug}"><span class="dir">Previous</span><span class="to-name">${escapeHtml(prev.id)}</span></a>` : "<span></span>"}
+          ${next ? `<a class="next" href="/routes/${next.slug}"><span class="dir">Next</span><span class="to-name">${escapeHtml(next.id)}</span></a>` : "<span></span>"}
         </div>
-      </section>\`;
+      </section>`;
 
   return renderPage({
     key: "routes",
-    title: \`\${route.id}: \${route.corridor} | Multiplex\`,
+    title: `${route.id}: ${route.corridor} | Multiplex`,
     description: route.summary,
-    path: \`/routes/\${route.slug}\`,
+    path: `/routes/${route.slug}`,
     main,
   });
 }
