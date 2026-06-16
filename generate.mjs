@@ -17,6 +17,7 @@ import {
   nonContiguousSeed,
   notableAuxSeed,
   slugFromId,
+  normalizeRouteInput,
 } from "./data/routes.mjs";
 import * as C from "./data/content.mjs";
 import details from "./data/details.mjs";
@@ -366,7 +367,8 @@ function buildDecoder() {
 function junctionLinks(route) {
   if (!route.junctions.length) return '<span class="chip">None recorded</span>';
   return route.junctions
-    .map((id) => {
+    .map((rawId) => {
+      const id = normalizeRouteInput(rawId);
       const target = pageById.get(id);
       const href = target ? `/routes/${target.slug}` : `/database?q=${encodeURIComponent(id)}`;
       return `<a href="${href}">${shieldHTML(id, "sm")}<span>${escapeHtml(id)}</span></a>`;
@@ -378,7 +380,8 @@ function junctionLinks(route) {
 function auxLinks(route) {
   if (!route.auxiliaries.length) return "";
   return route.auxiliaries
-    .map((id) => {
+    .map((rawId) => {
+      const id = normalizeRouteInput(rawId);
       const target = pageById.get(id);
       const href = target ? `/routes/${target.slug}` : `/database?q=${encodeURIComponent(id)}`;
       return `<a href="${href}">${shieldHTML(id, "sm")}<span>${escapeHtml(id)}</span></a>`;
