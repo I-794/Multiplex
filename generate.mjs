@@ -79,6 +79,25 @@ function enrich(route) {
 const orderedPages = [...activePrimarySeed, ...nonContiguousSeed, ...notableAuxSeed];
 const orderIndex = new Map(orderedPages.map((r, i) => [r.id, i]));
 
+// Enrich every documented route once so the connecting-routes network can be
+// built in both directions: a junction A->B should also surface B->A.
+const enrichedById = new Map(routesWithPages.map((r) => [r.id, enrich(r)]));
+const incomingConnections = new Map();
+for (const [id, r] of enrichedById) {
+  for (const raw of r.junctions || []) {
+    const target = normalizeRouteInput(raw);
+    if (!incomingConnections.has(target)) incomingConnections.set(target, new Set());
+    incomingConnections.get(target).add(id);
+  }
+}
+
+// Sort route ids the way humans read them: by number, then by full id.
+function routeIdSort(a, b) {
+  const na = parseInt(String(a).replace(/\D/g, ""), 10) || 0;
+  const nb = parseInt(String(b).replace(/\D/g, ""), 10) || 0;
+  return na - nb || String(a).localeCompare(String(b));
+}
+
 function orderRank(r) {
   return r.category === "Primary" ? 0 : r.category === "Non-contiguous" ? 1 : 2;
 }
@@ -166,6 +185,7 @@ function buildHome() {
             <div class="btn-row">
               <a class="btn btn-primary" href="/database">Browse the database</a>
               <a class="btn btn-secondary" href="/decoder">Decode a number</a>
+              <button class="btn btn-secondary" type="button" data-random-route>Random route</button>
             </div>
           </div>
           <aside class="board" aria-label="System highlights">
@@ -201,6 +221,44 @@ function buildHome() {
               (m) => `<div class="metric"><span class="metric-value mono">${m.v}</span><span class="metric-label">${escapeHtml(m.label)}</span></div>`
             )
             .join("\n          ")}
+        </div>
+      </section>
+
+      <section class="wrap section-tight" hidden data-fav-section>
+        <div class="section-head" style="margin-bottom:20px">
+          <p class="kicker">Your saved routes</p>
+          <h2 style="font-size:1.6rem">Pick up where you left off.</h2>
+        </div>
+        <div class="grid grid-3" data-fav-list></div>
+      </section>
+
+      <section class="wrap section">
+        <div class="section-head">
+          <p class="kicker">What's new</p>
+          <h2>Faster ways around the atlas.</h2>
+          <p>A few new tools to move through the system more quickly.</p>
+        </div>
+        <div class="grid grid-2">
+          <div class="card whatsnew-card" data-reveal>
+            <span class="whatsnew-key mono">/</span>
+            <h3>Quick search</h3>
+            <p>Press <kbd>/</kbd> or <kbd>&#8984;K</kbd> anywhere to jump straight to any route by number.</p>
+          </div>
+          <div class="card whatsnew-card" data-reveal>
+            <span class="whatsnew-key" aria-hidden="true">&#9733;</span>
+            <h3>Save your routes</h3>
+            <p>Bookmark routes with the <strong>Save</strong> button and find them back here on the home page.</p>
+          </div>
+          <div class="card whatsnew-card" data-reveal>
+            <span class="whatsnew-key" aria-hidden="true">&#128279;</span>
+            <h3>Share &amp; randomize</h3>
+            <p>Copy a direct link from any route page, or hit <strong>Random route</strong> to explore something new.</p>
+          </div>
+          <div class="card whatsnew-card" data-reveal>
+            <span class="whatsnew-key" aria-hidden="true">&#128279;</span>
+            <h3>Connecting routes</h3>
+            <p>Every route page now maps the Interstates it meets &mdash; follow the shields across the network.</p>
+          </div>
         </div>
       </section>
 
@@ -364,11 +422,17 @@ function buildDecoder() {
 
 // === ROUTE DETAIL ============================================================
 
-function junctionLinks(route) {
-  if (!route.junctions.length) return '<span class="chip">None recorded</span>';
-  return route.junctions
-    .map((rawId) => {
-      const id = normalizeRouteInput(rawId);
+// The full connecting-routes network: outgoing junctions plus any route that
+// names this one as a junction. Renders each as a clickable shield.
+function connectionLinks(route) {
+  const ids = new Set();
+  for (const raw of route.junctions || []) ids.add(normalizeRouteInput(raw));
+  for (const from of incomingConnections.get(route.id) || []) ids.add(from);
+  ids.delete(route.id);
+  if (!ids.size) return '<span class="chip">None recorded</span>';
+  return [...ids]
+    .sort(routeIdSort)
+    .map((id) => {
       const target = pageById.get(id);
       const href = target ? `/routes/${target.slug}` : `/database?q=${encodeURIComponent(id)}`;
       return `<a href="${href}">${shieldHTML(id, "sm")}<span>${escapeHtml(id)}</span></a>`;
@@ -488,6 +552,14 @@ function buildRoutePage(base) {
               <span class="chip">${escapeHtml(route.axis)}</span>
               <span class="chip">${escapeHtml(route.states)}</span>
             </div>
+            <div class="route-actions">
+              <button class="btn-chip" type="button" data-fav data-id="${escapeHtml(route.id)}" data-slug="${escapeHtml(route.slug)}" data-label="${escapeHtml(route.corridor)}" aria-pressed="false">
+                <span class="fav-star" aria-hidden="true">&#9733;</span><span class="fav-text">Save</span>
+              </button>
+              <button class="btn-chip" type="button" data-copy-link>
+                <span aria-hidden="true">&#128279;</span><span class="copy-text">Copy link</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -521,9 +593,10 @@ function buildRoutePage(base) {
               </ul>
             </div>
             <div class="card" style="margin-top:18px">
-              <h3 style="font-size:1rem">Interstate junctions</h3>
+              <h3 style="font-size:1rem">Connecting routes</h3>
+              <p class="card-note">Interstates that meet ${escapeHtml(route.id)}. Follow any shield to jump across the network.</p>
               <div class="junction-links">
-                ${junctionLinks(route)}
+                ${connectionLinks(route)}
               </div>
             </div>
             ${auxCard}
@@ -1067,6 +1140,21 @@ const stateCodes = [...routesByState.keys()];
 for (const code of stateCodes) {
   write(`states/${stateSlug(code)}.html`, buildStatePage(code));
 }
+
+// Compact client-side route index powering the quick-search palette, the
+// "random route" button, and the saved-routes (favorites) list.
+write(
+  "assets/routes-index.json",
+  JSON.stringify(
+    routesWithPages.map((r) => ({
+      id: r.id,
+      slug: r.slug,
+      corridor: r.corridor,
+      axis: r.axis,
+      category: r.category,
+    }))
+  )
+);
 
 write("sitemap.xml", buildSitemap());
 write("robots.txt", buildRobots());
