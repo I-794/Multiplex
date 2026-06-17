@@ -7,7 +7,8 @@
     <meta name="description" content="The longest, shortest, most-connected, oldest, and newest U.S. Interstate Highways, computed from route data." />
     <link rel="canonical" href="https://interstate-index.vercel.app/superlatives" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#0b0f17" />
+    <meta name="theme-color" content="#fbfbf8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0f17" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Multiplex" />
     <meta property="og:title" content="Interstate superlatives | Multiplex" />
@@ -20,7 +21,7 @@
     <meta name="twitter:image" content="https://interstate-index.vercel.app/assets/og.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+    <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body class="">
@@ -64,12 +65,12 @@
           <a class="card card-link route-card" href="/routes/I-90" data-reveal>
             <div class="route-card-head"><span class="shield" aria-hidden="true"><span class="shield-num">90</span></span><div class="route-card-meta"><span class="name">I-90</span><span class="sub">Longest Interstate</span></div></div>
             <p>Seattle to Boston.</p>
-            <span class="stat mono">3,020 mi</span>
+            <span class="stat mono">3,204.6 mi</span>
           </a>
           <a class="card card-link route-card" href="/routes/I-87" data-reveal>
             <div class="route-card-head"><span class="shield" aria-hidden="true"><span class="shield-num">87</span></span><div class="route-card-meta"><span class="name">I-87</span><span class="sub">Shortest two-digit</span></div></div>
             <p>Raleigh area.</p>
-            <span class="stat mono">14 mi</span>
+            <span class="stat mono">13.5 mi</span>
           </a>
           <a class="card card-link route-card" href="/routes/I-95" data-reveal>
             <div class="route-card-head"><span class="shield" aria-hidden="true"><span class="shield-num">95</span></span><div class="route-card-meta"><span class="name">I-95</span><span class="sub">Most states crossed</span></div></div>
@@ -96,7 +97,7 @@
             <p>San Francisco to Teaneck.</p>
             <span class="stat mono">9 auxiliaries</span>
           </a></div>
-        <div class="note" style="margin-top:28px"><span aria-hidden="true">&#9432;</span><span>Combined length of the active two-digit mainlines in this index: <strong class="mono">42,806</strong> miles.</span></div>
+        <div class="note" style="margin-top:28px"><span aria-hidden="true">&#9432;</span><span>Combined length of the active two-digit mainlines in this index: <strong class="mono">42,637.5</strong> miles.</span></div>
       </section>
     </main>
 

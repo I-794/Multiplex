@@ -3,24 +3,25 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Interstate route database | Multiplex</title>
-    <meta name="description" content="Search and filter every active U.S. Interstate route plus every theoretical number slot from I-1 to I-999." />
-    <link rel="canonical" href="https://interstate-index.vercel.app/database" />
+    <title>Glossary of Interstate and highway terms | Multiplex</title>
+    <meta name="description" content="Definitions of the terms used across Multiplex, from auxiliary route to controlled access." />
+    <link rel="canonical" href="https://interstate-index.vercel.app/glossary" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#0b0f17" />
+    <meta name="theme-color" content="#fbfbf8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0f17" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Multiplex" />
-    <meta property="og:title" content="Interstate route database | Multiplex" />
-    <meta property="og:description" content="Search and filter every active U.S. Interstate route plus every theoretical number slot from I-1 to I-999." />
-    <meta property="og:url" content="https://interstate-index.vercel.app/database" />
+    <meta property="og:title" content="Glossary of Interstate and highway terms | Multiplex" />
+    <meta property="og:description" content="Definitions of the terms used across Multiplex, from auxiliary route to controlled access." />
+    <meta property="og:url" content="https://interstate-index.vercel.app/glossary" />
     <meta property="og:image" content="https://interstate-index.vercel.app/assets/og.svg" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Interstate route database | Multiplex" />
-    <meta name="twitter:description" content="Search and filter every active U.S. Interstate route plus every theoretical number slot from I-1 to I-999." />
+    <meta name="twitter:title" content="Glossary of Interstate and highway terms | Multiplex" />
+    <meta name="twitter:description" content="Definitions of the terms used across Multiplex, from auxiliary route to controlled access." />
     <meta name="twitter:image" content="https://interstate-index.vercel.app/assets/og.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+    <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body class="">
@@ -34,7 +35,7 @@
         </a>
         <div class="topbar-controls">
           <nav class="nav-links" aria-label="Primary" data-nav>
-            <a class="nav-link is-active" href="/database" aria-current="page">Database</a>
+            <a class="nav-link" href="/database">Database</a>
           <a class="nav-link" href="/decoder">Decoder</a>
           <a class="nav-link" href="/routes">Routes</a>
           <a class="nav-link" href="/guide">Guide</a>
@@ -54,45 +55,26 @@
     </header>
     <main id="main">
 
-      <section class="wrap-wide section">
+      <section class="wrap section">
         <div class="section-head">
-          <p class="kicker">Reference database</p>
-          <h1>Find any Interstate designation.</h1>
-          <p>Seeded active routes sit alongside generated records for every possible number, so assigned highways and theoretical slots can be compared in one place. Select a row for details, or open its full page.</p>
+          <p class="kicker">Glossary</p>
+          <h1>The terms, defined.</h1>
+          <p class="lead">A short reference for the highway and numbering terms used across this site.</p>
         </div>
-
-        <div class="browser">
-          <div class="browser-main">
-            <div class="toolbar">
-              <div class="field">
-                <label for="route-search">Search</label>
-                <input id="route-search" type="search" autocomplete="off" placeholder="Route, state, parent, or corridor" />
-              </div>
-              <div class="filters" role="group" aria-label="Route filters">
-                <button class="filter is-active" data-filter="all" type="button">All</button>
-                <button class="filter" data-filter="primary" type="button">Primary</button>
-                <button class="filter" data-filter="auxiliary" type="button">Auxiliary</button>
-                <button class="filter" data-filter="possible" type="button">Possible</button>
-                <button class="filter" data-filter="noncontiguous" type="button">Non-contiguous</button>
-              </div>
-            </div>
-            <div class="result-meta">
-              <span><span id="result-count">0 results</span> <span id="result-context">Showing the full index</span></span>
-              <label class="sort-control">Sort by
-                <select id="route-sort">
-                  <option value="relevance">Relevance</option>
-                  <option value="number">Number</option>
-                  <option value="length">Length</option>
-                  <option value="year">Year designated</option>
-                  <option value="states">States crossed</option>
-                </select>
-              </label>
-            </div>
-            <div class="route-list" id="route-list" aria-live="polite"></div>
-          </div>
-          <aside class="detail-panel" id="route-detail" aria-label="Selected route detail"></aside>
-        </div>
-        <div id="compare-bar" class="compare-bar" hidden aria-live="polite"></div>
+        <dl class="glossary">
+          <div><dt>Mainline (primary) route</dt><dd>A one or two-digit Interstate that forms part of the core national grid.</dd></div>
+          <div><dt>Auxiliary route</dt><dd>A three-digit Interstate that branches from a two-digit parent as a loop, bypass, or spur.</dd></div>
+          <div><dt>Parent route</dt><dd>The two-digit Interstate named by the last two digits of a three-digit auxiliary route.</dd></div>
+          <div><dt>Loop or beltway</dt><dd>An auxiliary route that leaves its parent and rejoins it at both ends, usually circling a city. Typically an even first digit.</dd></div>
+          <div><dt>Spur</dt><dd>An auxiliary route that connects to its parent at one end only, usually reaching into a downtown or a port. Typically an odd first digit.</dd></div>
+          <div><dt>Axis</dt><dd>The general direction a mainline runs: north-south for odd numbers, east-west for even numbers.</dd></div>
+          <div><dt>Controlled access</dt><dd>A highway that traffic can enter or leave only at designed interchanges, with no driveways or cross streets.</dd></div>
+          <div><dt>Terminus</dt><dd>The point where a route begins or ends, often at a junction with another highway or an international border.</dd></div>
+          <div><dt>Concurrency</dt><dd>A stretch where two route numbers share the same physical roadway, such as I-20 and I-59 across Alabama.</dd></div>
+          <div><dt>Non-contiguous route</dt><dd>A federally recognized Interstate outside the connected lower-48 network, in Hawaii, Alaska, or Puerto Rico.</dd></div>
+          <div><dt>Shield</dt><dd>The red, white, and blue marker that identifies an Interstate route on signs.</dd></div>
+          <div><dt>Suffix route</dt><dd>A mainline split into lettered branches through a metro area, such as I-35E and I-35W.</dd></div>
+        </dl>
       </section>
     </main>
 
@@ -132,6 +114,6 @@
       </div>
     </footer>
     <script type="module" src="/assets/ui.mjs"></script>
-    <script type="module" src="/assets/app.mjs"></script>
+
   </body>
 </html>
