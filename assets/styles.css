@@ -1887,6 +1887,205 @@ p {
   color: var(--text-muted);
 }
 
+/* ----- Phase 2: actions, favorites, what's-new, command palette ----------- */
+
+/* small pill action buttons (Save / Copy link on route pages) */
+.route-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.btn-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: color 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+}
+
+.btn-chip:hover {
+  color: var(--text);
+  border-color: var(--green);
+}
+
+.btn-chip .fav-star {
+  color: var(--text-subtle);
+  transition: color 0.16s ease;
+}
+
+.btn-chip.is-saved {
+  color: var(--green);
+  border-color: var(--green);
+  background: rgba(0, 106, 78, 0.08);
+}
+
+.btn-chip.is-saved .fav-star { color: var(--amber-soft); }
+.btn-chip.is-copied { color: var(--green); border-color: var(--green); }
+
+.card-note {
+  margin: 0 0 12px;
+  font-size: 0.82rem;
+  color: var(--text-subtle);
+}
+
+/* "What's new" cards */
+.whatsnew-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.whatsnew-card h3 { margin: 4px 0 0; }
+.whatsnew-card p { margin: 0; font-size: 0.92rem; }
+
+.whatsnew-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--r-md);
+  background: var(--green-ink);
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+kbd {
+  display: inline-block;
+  min-width: 1.2em;
+  padding: 1px 6px;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: var(--surface-2);
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* decoder family (parent + siblings/children) */
+.decoder-family { margin-top: 18px; }
+.decoder-family .k {
+  display: block;
+  margin: 0 0 8px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+/* command palette (quick search) */
+.cmdk {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+}
+
+.cmdk[hidden] { display: none; }
+
+.cmdk-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 30, 50, 0.42);
+  backdrop-filter: blur(3px);
+}
+
+.cmdk-panel {
+  position: relative;
+  width: min(560px, calc(100% - 32px));
+  margin: 12vh auto 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  animation: cmdk-in 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cmdk-in {
+  from { opacity: 0; transform: translateY(-8px) scale(0.99); }
+  to { opacity: 1; transform: none; }
+}
+
+.cmdk-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text-subtle);
+}
+
+.cmdk-field input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+.cmdk-field input::placeholder { color: var(--text-subtle); }
+
+.cmdk-results {
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  max-height: 52vh;
+  overflow: auto;
+}
+
+.cmdk-item {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 12px;
+  border-radius: var(--r-md);
+  cursor: pointer;
+}
+
+.cmdk-item.is-active { background: var(--surface-2); }
+.cmdk-id { color: var(--green-bright); font-weight: 600; }
+.cmdk-corr {
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cmdk-axis { color: var(--text-subtle); font-size: 0.74rem; }
+
+.cmdk-empty { padding: 18px 14px; color: var(--text-subtle); font-size: 0.92rem; }
+
+.cmdk-hint {
+  padding: 10px 18px;
+  border-top: 1px solid var(--line);
+  background: var(--surface-2);
+  font-size: 0.72rem;
+  color: var(--text-subtle);
+}
+
+@media (max-width: 520px) {
+  .cmdk-panel { margin-top: 8vh; }
+  .cmdk-item { grid-template-columns: 56px minmax(0, 1fr); }
+  .cmdk-axis { display: none; }
+}
+
 /* ----- Scroll reveal ------------------------------------------------------ */
 [data-reveal] {
   opacity: 0;

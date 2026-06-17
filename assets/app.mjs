@@ -410,13 +410,45 @@ if (decoderInput && decoderOutput) {
       const pageBit = item.hasPage
         ? ` <a class="btn-ghost" href="/routes/${item.slug}">Open the full ${escapeHtml(item.id)} page</a>`
         : "";
+
+      // Show the route's place in the family: its parent + sibling auxiliaries
+      // (other children of the same parent), or, for a two-digit mainline, its
+      // own auxiliary children.
+      const relatedLink = (rel) => {
+        const href = rel.hasPage ? `/routes/${rel.slug}` : `/database?q=${encodeURIComponent(rel.id)}`;
+        return `<a href="${href}">${shieldMarkup(rel.id, "sm")}<span>${escapeHtml(rel.id)}</span></a>`;
+      };
+      let family = "";
+      if (item.parent) {
+        const parent = findRoute(allRoutes, item.parent);
+        const siblings = allRoutes
+          .filter((r) => r.parent === item.parent && r.id !== item.id)
+          .sort((a, b) => numericFromId(a.id) - numericFromId(b.id));
+        family = `
+        <div class="decoder-family">
+          ${parent ? `<p class="k mono">Parent</p><div class="junction-links">${relatedLink(parent)}</div>` : ""}
+          ${siblings.length ? `<p class="k mono" style="margin-top:14px">Sibling auxiliaries</p><div class="junction-links">${siblings.map(relatedLink).join("")}</div>` : ""}
+        </div>`;
+      } else {
+        const children = allRoutes
+          .filter((r) => r.parent === item.id)
+          .sort((a, b) => numericFromId(a.id) - numericFromId(b.id));
+        if (children.length) {
+          family = `
+        <div class="decoder-family">
+          <p class="k mono">Auxiliary routes</p>
+          <div class="junction-links">${children.map(relatedLink).join("")}</div>
+        </div>`;
+        }
+      }
+
       decoderOutput.innerHTML = `
         <div class="detail-top" style="margin-bottom:14px">
           ${shieldMarkup(item.id)}
           <span class="status ${statusClass(item.status)}">${escapeHtml(item.status)}</span>
         </div>
         <h3>${escapeHtml(item.id)} is ${escapeHtml(item.status.toLowerCase())}.</h3>
-        <p>${escapeHtml(item.summary)}${dirBit}${parentBit}${pageBit}</p>`;
+        <p>${escapeHtml(item.summary)}${dirBit}${parentBit}${pageBit}</p>${family}`;
       return;
     }
 
