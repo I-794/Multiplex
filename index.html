@@ -7,7 +7,8 @@
     <meta name="description" content="Browse every active Interstate Highway, decode any route number, and explore the logic behind the U.S. Interstate numbering system." />
     <link rel="canonical" href="https://interstate-index.vercel.app" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#0b0f17" />
+    <meta name="theme-color" content="#fbfbf8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0f17" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Multiplex" />
     <meta property="og:title" content="Multiplex | A reference atlas for U.S. Interstate numbering" />
@@ -20,7 +21,7 @@
     <meta name="twitter:image" content="https://interstate-index.vercel.app/assets/og.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+    <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body class="">
@@ -79,42 +80,42 @@
                 <a href="/routes/I-90">
                   <span class="shield shield-sm" aria-hidden="true"><span class="shield-num">90</span></span>
                   <span class="board-meta"><span class="board-name">I-90</span><span class="board-sub">Seattle to Boston</span></span>
-                  <span class="board-stat mono">3,020 mi</span>
+                  <span class="board-stat mono">3,204.6 mi</span>
                 </a>
               </li>
               <li>
                 <a href="/routes/I-95">
                   <span class="shield shield-sm" aria-hidden="true"><span class="shield-num">95</span></span>
                   <span class="board-meta"><span class="board-name">I-95</span><span class="board-sub">Miami to Houlton</span></span>
-                  <span class="board-stat mono">1,908 mi</span>
+                  <span class="board-stat mono">1,925.3 mi</span>
                 </a>
               </li>
               <li>
                 <a href="/routes/I-10">
                   <span class="shield shield-sm" aria-hidden="true"><span class="shield-num">10</span></span>
                   <span class="board-meta"><span class="board-name">I-10</span><span class="board-sub">Santa Monica to Jacksonville</span></span>
-                  <span class="board-stat mono">2,460 mi</span>
+                  <span class="board-stat mono">2,460.2 mi</span>
                 </a>
               </li>
               <li>
                 <a href="/routes/I-5">
                   <span class="shield shield-sm" aria-hidden="true"><span class="shield-num">5</span></span>
                   <span class="board-meta"><span class="board-name">I-5</span><span class="board-sub">San Diego to the Canadian border</span></span>
-                  <span class="board-stat mono">1,381 mi</span>
+                  <span class="board-stat mono">1,381.2 mi</span>
                 </a>
               </li>
               <li>
                 <a href="/routes/I-70">
                   <span class="shield shield-sm" aria-hidden="true"><span class="shield-num">70</span></span>
                   <span class="board-meta"><span class="board-name">I-70</span><span class="board-sub">Cove Fort to Baltimore</span></span>
-                  <span class="board-stat mono">2,151 mi</span>
+                  <span class="board-stat mono">2,170.9 mi</span>
                 </a>
               </li>
               <li>
                 <a href="/routes/I-97">
                   <span class="shield shield-sm" aria-hidden="true"><span class="shield-num">97</span></span>
                   <span class="board-meta"><span class="board-name">I-97</span><span class="board-sub">Annapolis to Baltimore</span></span>
-                  <span class="board-stat mono">18 mi</span>
+                  <span class="board-stat mono">17.6 mi</span>
                 </a>
               </li>
             </ul>
@@ -173,7 +174,7 @@
               </div>
             </div>
             <p>Seattle to Boston.</p>
-            <span class="stat mono">3,020 mi</span>
+            <span class="stat mono">3,204.6 mi</span>
           </a>
           <a class="card card-link route-card" href="/routes/I-95" data-reveal>
             <div class="route-card-head">
@@ -184,7 +185,7 @@
               </div>
             </div>
             <p>Miami to Houlton.</p>
-            <span class="stat mono">1,908 mi</span>
+            <span class="stat mono">1,925.3 mi</span>
           </a>
           <a class="card card-link route-card" href="/routes/I-10" data-reveal>
             <div class="route-card-head">
@@ -195,7 +196,7 @@
               </div>
             </div>
             <p>Santa Monica to Jacksonville.</p>
-            <span class="stat mono">2,460 mi</span>
+            <span class="stat mono">2,460.2 mi</span>
           </a>
           <a class="card card-link route-card" href="/routes/I-5" data-reveal>
             <div class="route-card-head">
@@ -206,7 +207,7 @@
               </div>
             </div>
             <p>San Diego to the Canadian border.</p>
-            <span class="stat mono">1,381 mi</span>
+            <span class="stat mono">1,381.2 mi</span>
           </a>
           <a class="card card-link route-card" href="/routes/I-70" data-reveal>
             <div class="route-card-head">
@@ -217,7 +218,7 @@
               </div>
             </div>
             <p>Cove Fort to Baltimore.</p>
-            <span class="stat mono">2,151 mi</span>
+            <span class="stat mono">2,170.9 mi</span>
           </a>
           <a class="card card-link route-card" href="/routes/I-97" data-reveal>
             <div class="route-card-head">
@@ -228,7 +229,7 @@
               </div>
             </div>
             <p>Annapolis to Baltimore.</p>
-            <span class="stat mono">18 mi</span>
+            <span class="stat mono">17.6 mi</span>
           </a>
         </div>
         <div style="margin-top:24px">

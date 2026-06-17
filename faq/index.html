@@ -3,24 +3,25 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Glossary of Interstate and highway terms | Multiplex</title>
-    <meta name="description" content="Definitions of the terms used across Multiplex, from auxiliary route to controlled access." />
-    <link rel="canonical" href="https://interstate-index.vercel.app/glossary" />
+    <title>Interstate Highway FAQ | Multiplex</title>
+    <meta name="description" content="Common questions about the U.S. Interstate Highway System: numbering, the longest and shortest routes, shields, and more." />
+    <link rel="canonical" href="https://interstate-index.vercel.app/faq" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#0b0f17" />
+    <meta name="theme-color" content="#fbfbf8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0f17" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Multiplex" />
-    <meta property="og:title" content="Glossary of Interstate and highway terms | Multiplex" />
-    <meta property="og:description" content="Definitions of the terms used across Multiplex, from auxiliary route to controlled access." />
-    <meta property="og:url" content="https://interstate-index.vercel.app/glossary" />
+    <meta property="og:title" content="Interstate Highway FAQ | Multiplex" />
+    <meta property="og:description" content="Common questions about the U.S. Interstate Highway System: numbering, the longest and shortest routes, shields, and more." />
+    <meta property="og:url" content="https://interstate-index.vercel.app/faq" />
     <meta property="og:image" content="https://interstate-index.vercel.app/assets/og.svg" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Glossary of Interstate and highway terms | Multiplex" />
-    <meta name="twitter:description" content="Definitions of the terms used across Multiplex, from auxiliary route to controlled access." />
+    <meta name="twitter:title" content="Interstate Highway FAQ | Multiplex" />
+    <meta name="twitter:description" content="Common questions about the U.S. Interstate Highway System: numbering, the longest and shortest routes, shields, and more." />
     <meta name="twitter:image" content="https://interstate-index.vercel.app/assets/og.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+    <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body class="">
@@ -40,7 +41,7 @@
           <a class="nav-link" href="/guide">Guide</a>
           <a class="nav-link" href="/map">Map</a>
           <a class="nav-link" href="/history">History</a>
-          <a class="nav-link" href="/faq">FAQ</a>
+          <a class="nav-link is-active" href="/faq" aria-current="page">FAQ</a>
           </nav>
           <button class="theme-toggle" type="button" aria-label="Toggle light and dark theme" data-theme-toggle>
             <svg class="i-moon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>
@@ -56,24 +57,41 @@
 
       <section class="wrap section">
         <div class="section-head">
-          <p class="kicker">Glossary</p>
-          <h1>The terms, defined.</h1>
-          <p class="lead">A short reference for the highway and numbering terms used across this site.</p>
+          <p class="kicker">Questions</p>
+          <h1>Frequently asked.</h1>
+          <p class="lead">The questions that come up most about how the Interstate system is numbered and built.</p>
         </div>
-        <dl class="glossary">
-          <div><dt>Mainline (primary) route</dt><dd>A one or two-digit Interstate that forms part of the core national grid.</dd></div>
-          <div><dt>Auxiliary route</dt><dd>A three-digit Interstate that branches from a two-digit parent as a loop, bypass, or spur.</dd></div>
-          <div><dt>Parent route</dt><dd>The two-digit Interstate named by the last two digits of a three-digit auxiliary route.</dd></div>
-          <div><dt>Loop or beltway</dt><dd>An auxiliary route that leaves its parent and rejoins it at both ends, usually circling a city. Typically an even first digit.</dd></div>
-          <div><dt>Spur</dt><dd>An auxiliary route that connects to its parent at one end only, usually reaching into a downtown or a port. Typically an odd first digit.</dd></div>
-          <div><dt>Axis</dt><dd>The general direction a mainline runs: north-south for odd numbers, east-west for even numbers.</dd></div>
-          <div><dt>Controlled access</dt><dd>A highway that traffic can enter or leave only at designed interchanges, with no driveways or cross streets.</dd></div>
-          <div><dt>Terminus</dt><dd>The point where a route begins or ends, often at a junction with another highway or an international border.</dd></div>
-          <div><dt>Concurrency</dt><dd>A stretch where two route numbers share the same physical roadway, such as I-20 and I-59 across Alabama.</dd></div>
-          <div><dt>Non-contiguous route</dt><dd>A federally recognized Interstate outside the connected lower-48 network, in Hawaii, Alaska, or Puerto Rico.</dd></div>
-          <div><dt>Shield</dt><dd>The red, white, and blue marker that identifies an Interstate route on signs.</dd></div>
-          <div><dt>Suffix route</dt><dd>A mainline split into lettered branches through a metro area, such as I-35E and I-35W.</dd></div>
-        </dl>
+        <div style="max-width:78ch">
+          
+          <div class="faq-item" data-reveal>
+            <h3>Why do some Interstate numbers repeat in different states?</h3>
+            <p>Three-digit auxiliary numbers are tied to a two-digit parent that passes through many cities, so the same number is reused near each city. There are also a handful of duplicate two-digit routes, such as two separate I-76 and I-84 routes, that exist for historical reasons.</p>
+          </div>
+          <div class="faq-item" data-reveal>
+            <h3>What is the longest Interstate?</h3>
+            <p>I-90 is the longest, running about 3,020 miles from Seattle to Boston. I-80 is the second longest at roughly 2,899 miles.</p>
+          </div>
+          <div class="faq-item" data-reveal>
+            <h3>What is the shortest two-digit Interstate?</h3>
+            <p>I-97 in Maryland, at about 18 miles between Annapolis and Baltimore, is usually given this title, and it is the only two-digit Interstate contained entirely within a single county. Newer routes that are still being built, such as the signed segment of I-87 in North Carolina, are shorter for now.</p>
+          </div>
+          <div class="faq-item" data-reveal>
+            <h3>How do I read a three-digit number?</h3>
+            <p>The last two digits name the parent route. The first digit tells you the job: an even first digit usually means a loop or bypass, while an odd first digit usually means a spur or connector.</p>
+          </div>
+          <div class="faq-item" data-reveal>
+            <h3>Why does I-99 sit in the wrong place?</h3>
+            <p>Interstate numbers usually rise from west to east, but I-99 in Pennsylvania sits far east of many lower-numbered routes. Its number was written directly into federal law rather than assigned through the normal process.</p>
+          </div>
+          <div class="faq-item" data-reveal>
+            <h3>Are Hawaii and Alaska really on the Interstate system?</h3>
+            <p>Yes. Hawaii&#039;s H-1, H-2, and H-3 are signed Interstates funded by the federal program. Alaska and Puerto Rico also have federally recognized Interstate routes, though Alaska&#039;s are not signed with shields.</p>
+          </div>
+          <div class="faq-item" data-reveal>
+            <h3>Why is I-19 signed in kilometers?</h3>
+            <p>I-19 in Arizona runs from the Mexican border to Tucson and was signed in metric units during a period when the United States considered a wider switch to the metric system. The signs were kept.</p>
+          </div>
+        </div>
       </section>
     </main>
 

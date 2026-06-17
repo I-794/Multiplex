@@ -3,24 +3,25 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sources and method | Multiplex</title>
-    <meta name="description" content="How Multiplex is sourced and the limits of its data." />
-    <link rel="canonical" href="https://interstate-index.vercel.app/sources" />
+    <title>Interstate route database | Multiplex</title>
+    <meta name="description" content="Search and filter every active U.S. Interstate route plus every theoretical number slot from I-1 to I-999." />
+    <link rel="canonical" href="https://interstate-index.vercel.app/database" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#0b0f17" />
+    <meta name="theme-color" content="#fbfbf8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0f17" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Multiplex" />
-    <meta property="og:title" content="Sources and method | Multiplex" />
-    <meta property="og:description" content="How Multiplex is sourced and the limits of its data." />
-    <meta property="og:url" content="https://interstate-index.vercel.app/sources" />
+    <meta property="og:title" content="Interstate route database | Multiplex" />
+    <meta property="og:description" content="Search and filter every active U.S. Interstate route plus every theoretical number slot from I-1 to I-999." />
+    <meta property="og:url" content="https://interstate-index.vercel.app/database" />
     <meta property="og:image" content="https://interstate-index.vercel.app/assets/og.svg" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Sources and method | Multiplex" />
-    <meta name="twitter:description" content="How Multiplex is sourced and the limits of its data." />
+    <meta name="twitter:title" content="Interstate route database | Multiplex" />
+    <meta name="twitter:description" content="Search and filter every active U.S. Interstate route plus every theoretical number slot from I-1 to I-999." />
     <meta name="twitter:image" content="https://interstate-index.vercel.app/assets/og.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+    <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body class="">
@@ -34,7 +35,7 @@
         </a>
         <div class="topbar-controls">
           <nav class="nav-links" aria-label="Primary" data-nav>
-            <a class="nav-link" href="/database">Database</a>
+            <a class="nav-link is-active" href="/database" aria-current="page">Database</a>
           <a class="nav-link" href="/decoder">Decoder</a>
           <a class="nav-link" href="/routes">Routes</a>
           <a class="nav-link" href="/guide">Guide</a>
@@ -54,23 +55,45 @@
     </header>
     <main id="main">
 
-      <section class="wrap section">
+      <section class="wrap-wide section">
         <div class="section-head">
-          <p class="kicker">Sources and method</p>
-          <h1>Built for public reference.</h1>
-          <p class="lead">Multiplex is built for public reference and curiosity. Route records combine seeded data for active and federally recognized routes with generated records for every possible number slot.</p>
+          <p class="kicker">Reference database</p>
+          <h1>Find any Interstate designation.</h1>
+          <p>Seeded active routes sit alongside generated records for every possible number, so assigned highways and theoretical slots can be compared in one place. Select a row for details, or open its full page.</p>
         </div>
-        <div class="prose">
-          <p>Mileage and year figures are rounded reference values organized from public route logs and encyclopedic route lists. They are not survey measurements.</p>
-          <p>Planning, engineering, or legal work should be verified against current records from the Federal Highway Administration, AASHTO, and the relevant state departments of transportation.</p>
-          <h2>References</h2>
-          <ul>
-            <li><a href="https://www.fhwa.dot.gov/programadmin/interstate.cfm" target="_blank" rel="noreferrer">FHWA Interstate route numbering</a></li>
-            <li><a href="https://en.wikipedia.org/wiki/List_of_primary_Interstate_Highways" target="_blank" rel="noreferrer">List of primary Interstate Highways</a></li>
-            <li><a href="https://en.wikipedia.org/wiki/List_of_auxiliary_Interstate_Highways" target="_blank" rel="noreferrer">List of auxiliary Interstate Highways</a></li>
-            <li><a href="https://en.wikipedia.org/wiki/Interstate_Highway_System" target="_blank" rel="noreferrer">Interstate Highway System overview</a></li>
-          </ul>
+
+        <div class="browser">
+          <div class="browser-main">
+            <div class="toolbar">
+              <div class="field">
+                <label for="route-search">Search</label>
+                <input id="route-search" type="search" autocomplete="off" placeholder="Route, state, parent, or corridor" />
+              </div>
+              <div class="filters" role="group" aria-label="Route filters">
+                <button class="filter is-active" data-filter="all" type="button">All</button>
+                <button class="filter" data-filter="primary" type="button">Primary</button>
+                <button class="filter" data-filter="auxiliary" type="button">Auxiliary</button>
+                <button class="filter" data-filter="possible" type="button">Possible</button>
+                <button class="filter" data-filter="noncontiguous" type="button">Non-contiguous</button>
+              </div>
+            </div>
+            <div class="result-meta">
+              <span><span id="result-count">0 results</span> <span id="result-context">Showing the full index</span></span>
+              <label class="sort-control">Sort by
+                <select id="route-sort">
+                  <option value="relevance">Relevance</option>
+                  <option value="number">Number</option>
+                  <option value="length">Length</option>
+                  <option value="year">Year designated</option>
+                  <option value="states">States crossed</option>
+                </select>
+              </label>
+            </div>
+            <div class="route-list" id="route-list" aria-live="polite"></div>
+          </div>
+          <aside class="detail-panel" id="route-detail" aria-label="Selected route detail"></aside>
         </div>
+        <div id="compare-bar" class="compare-bar" hidden aria-live="polite"></div>
       </section>
     </main>
 
@@ -110,6 +133,6 @@
       </div>
     </footer>
     <script type="module" src="/assets/ui.mjs"></script>
-
+    <script type="module" src="/assets/app.mjs"></script>
   </body>
 </html>
